@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#a0a0a0</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="black">#CC000000</color>
+    <color name="white">#ffffff</color>
+    <color name="whites">#ffffff</color>
+    <color name="isBarcode">#0084ff</color>
+    <color name="isNotBarcode">#d0021b</color>
+    <color name="barcodeGuild">#a0a0a0</color>
+
+</resources>

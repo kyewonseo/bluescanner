@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">블루 스캐너</string>
+
+    <!--바코드 관련 한국어 정의가 필요-->
+    <string name="grant_permission">Grant Permission</string>
+    <string name="permission_camera">This app needs camera permission to scan barcode</string>
+    <string name="permission_camera_rationale">Access to the camera is needed for detection</string>
+    <string name="no_camera_permission">This application cannot run because it does not have the camera permission.  The application will now exit.</string>
+    <string name="grant">GRANT</string>
+    <string name="cancel">CANCEL</string>
+    <string name="barcode_guild">바코드가 인식되면 바로 결과를 표시됩니다.</string>
+    <string name="is_not_barcode">등록되지 않은 상품입니다.</string>
+    <string name="is_barcode">등록되어 있는 상품입니다.</string>
+    <string name="register_barcode_date">등록날짜 : </string>
+    <string name="register_barcode_guild">* 해당 상품을 촬영할 때, 아래의 "내가 촬영하기"를 \n 터치해주십시오.</string>
+    <string name="register_barcode">내가 촬영하기</string>
+
+</resources>
