@@ -39,6 +39,9 @@ public class CameraSourcePreview extends ViewGroup {
     private boolean mSurfaceAvailable;
     private CameraSource mCameraSource;
 
+    private final int defaultWidth = 1600;
+    private final int defaultHeight = 1200;
+
     private GraphicOverlay mOverlay;
 
     public CameraSourcePreview(Context context, AttributeSet attrs) {
@@ -132,8 +135,11 @@ public class CameraSourcePreview extends ViewGroup {
     @Override
     protected void onLayout (boolean changed, int left, int top, int right, int bottom)
     {
-        int width = getWidth();
-        int height = getHeight();
+//        int width = getWidth();
+//        int height = getHeight();
+
+        int width = defaultWidth;
+        int height = defaultHeight;
 
         if (mCameraSource != null) {
             Size size = mCameraSource.getPreviewSize();
