@@ -10,8 +10,12 @@
     <string name="grant">GRANT</string>
     <string name="cancel">CANCEL</string>
     <string name="barcode_guild">바코드가 인식되면 바로 결과를 표시됩니다.</string>
-    <string name="is_not_barcode">등록되지 않은 상품입니다.</string>
-    <string name="is_barcode">등록되어 있는 상품입니다.</string>
+
+    <string name="is_barcode_default">인식된 바코드 정보가 없습니다.</string>
+    <string name="is_barcode_exist">등록되어 있는 상품입니다.</string>
+    <string name="is_not_barcode_exist">등록되지 않은 상품입니다.</string>
+
+    <string name="is_not_exist_barcode_date">-</string>
     <string name="register_barcode_date">등록날짜 : </string>
     <string name="register_barcode_guild">* 해당 상품을 촬영할 때, 아래의 "내가 촬영하기"를 \n 터치해주십시오.</string>
     <string name="register_barcode">내가 촬영하기</string>

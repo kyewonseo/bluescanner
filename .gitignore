@@ -187,5 +187,8 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+# Firebase
+app/google-services.json
+src/main/res/raw/api_key.json
 
 # End of https://www.gitignore.io/api/macos,android,androidstudio

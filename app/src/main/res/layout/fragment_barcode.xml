@@ -6,13 +6,13 @@
     android:layout_height="match_parent">
 
     <!-- Barcode Reader fragment -->
-    <fragment
-        android:id="@+id/barcode_fragment"
-        class="net.bluehack.bluescanner.fragment.BarcodeFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:auto_focus="true"
-        app:use_flash="false" />
+    <!--<fragment-->
+        <!--android:id="@+id/barcode_fragment"-->
+        <!--class="net.bluehack.bluescanner.fragment.BarcodeFragment"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--app:auto_focus="true"-->
+        <!--app:use_flash="false"/>-->
 
     <!-- Scanner overlay animation -->
     <!--<info.androidhive.barcode.ScannerOverlay-->

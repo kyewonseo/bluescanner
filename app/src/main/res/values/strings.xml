@@ -9,8 +9,12 @@
     <string name="grant">GRANT</string>
     <string name="cancel">CANCEL</string>
     <string name="barcode_guild">barcode_guild</string>
-    <string name="is_not_barcode">This is not barcode product</string>
-    <string name="is_barcode">This is barcode product</string>
+
+    <string name="is_barcode_default">No barcode information recognized.</string>
+    <string name="is_exist_barcode">This product is registered.</string>
+    <string name="is_not_exist_barcode">This product is not registered.</string>
+
+    <string name="is_not_exist_barcode_date">-</string>
     <string name="register_barcode_date">date : </string>
     <string name="register_barcode_guild">* When filming the product (s) concerned, touch \ n (My photo) below.</string>
     <string name="register_barcode">I shoot</string>

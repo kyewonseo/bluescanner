@@ -1,9 +1,14 @@
 package net.bluehack.bluescanner;
 
+import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.SparseArray;
+import android.view.TextureView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.vision.barcode.Barcode;
@@ -16,22 +21,27 @@ import java.util.List;
 public class BarcodeActivity extends AppCompatActivity implements BarcodeReaderFragment.BarcodeReaderListener {
     private static final String TAG = MainActivity.class.getSimpleName();
 
+    private Context context;
     private BarcodeReaderFragment barcodeReader;
+    private TextView barcode_number;
+    private TextView barcode_status;
+    private TextView register_date_barcode;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_barcode);
 
+        context = this;
+
         // getting barcode instance
         barcodeReader = (BarcodeReaderFragment) getSupportFragmentManager().findFragmentById(R.id.barcode_fragment);
+        barcode_number = (TextView) findViewById(R.id.barcode_number);
+        barcode_status = (TextView) findViewById(R.id.barcode_status);
+        register_date_barcode = (TextView) findViewById(R.id.register_date_barcode);
 
-
-        /***
-         * Providing beep sound. The sound file has to be placed in
-         * `assets` folder
-         */
-        // barcodeReader.setBeepSoundFile("shutter.mp3");
+        initUIStatus();
 
         /**
          * Pausing / resuming barcode reader. This will be useful when you want to
@@ -40,6 +50,7 @@ public class BarcodeActivity extends AppCompatActivity implements BarcodeReaderF
          * */
         // barcodeReader.pauseScanning();
         // barcodeReader.resumeScanning();
+
     }
 
     @Override
@@ -50,9 +61,34 @@ public class BarcodeActivity extends AppCompatActivity implements BarcodeReaderF
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(getApplicationContext(), "Barcode: " + barcode.displayValue, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "Barcode: " + barcode.displayValue, Toast.LENGTH_SHORT).show();
+
+                barcode_number.setText(barcode.displayValue);
+
+                BarcodeManager.getInstance().getFirebaseBarcode(barcode.displayValue, new BarcodeManager.BarcodeListener() {
+                    @Override
+                    public void onResult(String barcodeDate) {
+
+                       if (barcodeDate == null || barcodeDate == "null") {
+
+                           barcode_status.setText(R.string.is_not_exist_barcode);
+                           barcode_status.setTextColor(ContextCompat.getColor(context, R.color.isNotBarcode));
+                           register_date_barcode.setText(R.string.is_not_exist_barcode_date);
+                       } else {
+                           barcode_status.setText(R.string.is_exist_barcode);
+                           barcode_status.setTextColor(ContextCompat.getColor(context, R.color.isBarcode));
+                           register_date_barcode.setText(barcodeDate);
+                       }
+                    }
+                });
             }
         });
+    }
+
+    private void initUIStatus() {
+        barcode_status.setText(R.string.is_barcode_default);
+        barcode_status.setTextColor(ContextCompat.getColor(context, R.color.black));
+        register_date_barcode.setText(R.string.is_not_exist_barcode_date);
     }
 
     @Override
@@ -68,7 +104,10 @@ public class BarcodeActivity extends AppCompatActivity implements BarcodeReaderF
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(getApplicationContext(), "Barcodes: " + finalCodes, Toast.LENGTH_SHORT).show();
+
+                //TODO: after
+//                Toast.makeText(getApplicationContext(), "Barcodes: " + finalCodes, Toast.LENGTH_SHORT).show();
+//                barcode_number.setText(finalCodes);
             }
         });
     }
