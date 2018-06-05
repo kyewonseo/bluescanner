@@ -189,6 +189,5 @@ Temporary Items
 
 # Firebase
 app/google-services.json
-app/src/main/res/raw/api_key.json
 
 # End of https://www.gitignore.io/api/macos,android,androidstudio

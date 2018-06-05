@@ -116,7 +116,6 @@
                     android:text="@string/register_barcode"
                     android:textColor="@color/white"
                     android:textSize="15sp" />
-
             </FrameLayout>
         </RelativeLayout>
     </FrameLayout>
