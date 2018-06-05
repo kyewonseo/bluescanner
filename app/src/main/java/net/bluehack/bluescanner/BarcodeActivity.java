@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.TextureView;
+import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +28,9 @@ public class BarcodeActivity extends AppCompatActivity implements BarcodeReaderF
     private TextView barcode_number;
     private TextView barcode_status;
     private TextView register_date_barcode;
+    private FrameLayout btn_register_barcode;
+
+    private String barcodeNumber;
 
 
     @Override
@@ -35,11 +40,19 @@ public class BarcodeActivity extends AppCompatActivity implements BarcodeReaderF
 
         context = this;
 
-        // getting barcode instance
         barcodeReader = (BarcodeReaderFragment) getSupportFragmentManager().findFragmentById(R.id.barcode_fragment);
         barcode_number = (TextView) findViewById(R.id.barcode_number);
         barcode_status = (TextView) findViewById(R.id.barcode_status);
         register_date_barcode = (TextView) findViewById(R.id.register_date_barcode);
+        btn_register_barcode = (FrameLayout) findViewById(R.id.btn_register_barcode);
+        btn_register_barcode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (getBarcodeNumber() != null) {
+                    BarcodeManager.getInstance().writeFirebaseBarcode(getBarcodeNumber());
+                }
+            }
+        });
 
         initUIStatus();
 
@@ -63,6 +76,7 @@ public class BarcodeActivity extends AppCompatActivity implements BarcodeReaderF
             public void run() {
 //                Toast.makeText(getApplicationContext(), "Barcode: " + barcode.displayValue, Toast.LENGTH_SHORT).show();
 
+                setBarcodeNumber(barcode.displayValue);
                 barcode_number.setText(barcode.displayValue);
 
                 BarcodeManager.getInstance().getFirebaseBarcode(barcode.displayValue, new BarcodeManager.BarcodeListener() {
@@ -126,5 +140,13 @@ public class BarcodeActivity extends AppCompatActivity implements BarcodeReaderF
     public void onCameraPermissionDenied() {
         Toast.makeText(getApplicationContext(), "Camera permission denied!", Toast.LENGTH_LONG).show();
         finish();
+    }
+
+    public String getBarcodeNumber() {
+        return barcodeNumber;
+    }
+
+    public void setBarcodeNumber(String barcodeNumber) {
+        this.barcodeNumber = barcodeNumber;
     }
 }

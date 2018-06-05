@@ -8,7 +8,9 @@ import com.google.firebase.database.ValueEventListener;
 
 import net.bluehack.bluescanner.firebase.FirebaseDatabaseHelper;
 import net.bluehack.bluescanner.model.Barcode;
+import net.bluehack.bluescanner.util.UiUtil;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,6 +50,16 @@ public class BarcodeManager {
 
                     }
                 });
+    }
+
+    public void writeFirebaseBarcode(final String barcodeNum) {
+
+        String date = UiUtil.getDateFormat();
+
+        FirebaseDatabaseHelper.getInstance().getDatabaseBlocks()
+                .child(BARCODE_TEST)
+                .child(barcodeNum)
+                .setValue(date);
     }
 
 }
