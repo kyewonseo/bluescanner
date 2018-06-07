@@ -46,7 +46,7 @@ public class BarcodeFragment extends Fragment implements BarcodeReaderFragment.B
     @Override
     public void onScanned(final Barcode barcode) {
         Log.e(TAG, "onScanned: " + barcode.displayValue);
-        barcodeReader.playBeep();
+//        barcodeReader.playBeep();
 
         getActivity().runOnUiThread(new Runnable() {
             @Override

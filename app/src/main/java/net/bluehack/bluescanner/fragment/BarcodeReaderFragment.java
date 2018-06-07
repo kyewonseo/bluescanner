@@ -12,6 +12,8 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.TypedArray;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.hardware.Camera;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -433,11 +435,12 @@ public class BarcodeReaderFragment extends Fragment implements View.OnTouchListe
 
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
-        boolean b = scaleGestureDetector.onTouchEvent(motionEvent);
 
+//        mCameraSource.setMacroFocusMode();
+        boolean b = scaleGestureDetector.onTouchEvent(motionEvent);
         boolean c = gestureDetector.onTouchEvent(motionEvent);
 
-        return b || c || view.onTouchEvent(motionEvent);
+        return c || view.onTouchEvent(motionEvent);
     }
 
     @Override

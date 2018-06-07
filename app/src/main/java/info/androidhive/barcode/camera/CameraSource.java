@@ -20,6 +20,7 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.ImageFormat;
+import android.graphics.Rect;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.hardware.Camera.CameraInfo;
@@ -546,6 +547,26 @@ public class CameraSource {
             }
 
             return false;
+        }
+    }
+
+    public void setMacroFocusMode() {
+        synchronized (mCameraLock) {
+            if (mCamera != null) {
+                mCamera.cancelAutoFocus();
+
+                Camera.Parameters parameters = mCamera.getParameters();
+                parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_MACRO);
+//                parameters.setFocusAreas((List<Camera.Area>) new Camera.Area(focusRect, 1000));
+
+                mCamera.setParameters(parameters);
+//                CameraAutoFocusCallback autoFocusCallback = null;
+//                if (cb != null) {
+//                    autoFocusCallback = new CameraAutoFocusCallback();
+//                    autoFocusCallback.mDelegate = cb;
+//                }
+//                mCamera.autoFocus(cb);
+            }
         }
     }
 

@@ -39,7 +39,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/barcode_guild"
+                android:layout_gravity="center"
+                android:text="@string/barcode_guide"
                 android:textColor="@color/white"
                 android:textSize="12sp" />
         </FrameLayout>
@@ -62,11 +63,11 @@
                     android:id="@+id/barcode_number"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="39.5dp"
+                    android:layout_marginBottom="32.5dp"
                     android:gravity="center"
                     android:text="barcode number"
                     android:textColor="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/barcode_status"
@@ -75,7 +76,8 @@
                     android:layout_marginBottom="18dp"
                     android:gravity="start"
                     android:text="@string/is_barcode_default"
-                    android:textSize="25dp" />
+                    android:textSize="25sp"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -93,7 +95,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="@string/register_barcode_guild"
+                    android:text="@string/register_barcode_guide"
                     android:textColor="@color/colorPrimary"
                     android:textSize="14sp"
                     android:gravity="bottom"
@@ -106,7 +108,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="63dp"
                 android:layout_alignParentBottom="true"
-                android:background="@color/isBarcode">
+                android:background="@drawable/selector_btn_barcode">
 
                 <TextView
                     android:layout_width="match_parent"

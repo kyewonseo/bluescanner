@@ -17,6 +17,7 @@ import com.google.android.gms.vision.barcode.Barcode;
 
 
 import net.bluehack.bluescanner.fragment.BarcodeReaderFragment;
+import net.bluehack.bluescanner.util.UiUtil;
 
 import java.util.List;
 
@@ -31,6 +32,7 @@ public class BarcodeActivity extends AppCompatActivity implements BarcodeReaderF
     private FrameLayout btn_register_barcode;
 
     private String barcodeNumber;
+    private boolean isFirebaseBarcode = false;
 
 
     @Override
@@ -48,8 +50,14 @@ public class BarcodeActivity extends AppCompatActivity implements BarcodeReaderF
         btn_register_barcode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 if (getBarcodeNumber() != null) {
-                    BarcodeManager.getInstance().writeFirebaseBarcode(getBarcodeNumber());
+                    if ( (!UiUtil.isNotValidKeyString(getBarcodeNumber())) && (!isFirebaseBarcode)) {
+                        BarcodeManager.getInstance().writeFirebaseBarcode(getBarcodeNumber());
+                        Toast.makeText(context, getString(R.string.confirm_barcode), Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(context, getString(R.string.no_confirm_barcode), Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });
@@ -69,7 +77,7 @@ public class BarcodeActivity extends AppCompatActivity implements BarcodeReaderF
     @Override
     public void onScanned(final Barcode barcode) {
         Log.e(TAG, "onScanned: " + barcode.displayValue);
-        barcodeReader.playBeep();
+//        barcodeReader.playBeep();
 
         runOnUiThread(new Runnable() {
             @Override
@@ -79,31 +87,49 @@ public class BarcodeActivity extends AppCompatActivity implements BarcodeReaderF
                 setBarcodeNumber(barcode.displayValue);
                 barcode_number.setText(barcode.displayValue);
 
-                BarcodeManager.getInstance().getFirebaseBarcode(barcode.displayValue, new BarcodeManager.BarcodeListener() {
-                    @Override
-                    public void onResult(String barcodeDate) {
+                if (UiUtil.isNotValidKeyString(barcode.displayValue)) {
+                    offBarcodeUIStatus();
 
-                       if (barcodeDate == null || barcodeDate == "null") {
+                } else {
+                    BarcodeManager.getInstance().getFirebaseBarcode(barcode.displayValue, new BarcodeManager.BarcodeListener() {
+                        @Override
+                        public void onResult(String barcodeDate) {
 
-                           barcode_status.setText(R.string.is_not_exist_barcode);
-                           barcode_status.setTextColor(ContextCompat.getColor(context, R.color.isNotBarcode));
-                           register_date_barcode.setText(R.string.is_not_exist_barcode_date);
-                       } else {
-                           barcode_status.setText(R.string.is_exist_barcode);
-                           barcode_status.setTextColor(ContextCompat.getColor(context, R.color.isBarcode));
-                           register_date_barcode.setText(barcodeDate);
-                       }
-                    }
-                });
+                            if (barcodeDate == null || barcodeDate == "null") {
+                                offBarcodeUIStatus();
+                                register_date_barcode.setText(R.string.is_not_exist_barcode_date);
+                            } else {
+                                onBarcodeUIStatus();
+                                register_date_barcode.setText(barcodeDate);
+                            }
+                        }
+                    });
+                }
+
             }
         });
     }
 
     private void initUIStatus() {
-        barcode_status.setText(R.string.is_barcode_default);
+        isFirebaseBarcode = false;
+        barcode_status.setText(getString(R.string.is_barcode_default));
         barcode_status.setTextColor(ContextCompat.getColor(context, R.color.black));
         register_date_barcode.setText(R.string.is_not_exist_barcode_date);
     }
+
+    private void onBarcodeUIStatus() {
+        isFirebaseBarcode = true;
+        barcode_status.setText(getString(R.string.is_exist_barcode));
+        barcode_status.setTextColor(ContextCompat.getColor(context, R.color.isBarcode));
+    }
+
+    private void offBarcodeUIStatus() {
+        isFirebaseBarcode = false;
+        barcode_status.setText(getString(R.string.is_not_exist_barcode));
+        barcode_status.setTextColor(ContextCompat.getColor(context, R.color.isNotBarcode));
+    }
+
+
 
     @Override
     public void onScannedMultiple(List<Barcode> barcodes) {

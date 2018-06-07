@@ -70,8 +70,8 @@ public class BarcodeGraphicTracker extends Tracker<Barcode> {
             Log.e("XX", "onUpdate: " + detectionResults.getDetectedItems().size());
 
             if (listener != null) {
-                List<Barcode> barcodes = asList(detectionResults.getDetectedItems());
-                listener.onScannedMultiple(barcodes);
+//                List<Barcode> barcodes = asList(detectionResults.getDetectedItems());
+//                listener.onScannedMultiple(barcodes);
             }
         }
     }
