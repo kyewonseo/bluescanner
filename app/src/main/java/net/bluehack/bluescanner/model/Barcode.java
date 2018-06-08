@@ -6,7 +6,8 @@ import com.google.firebase.database.IgnoreExtraProperties;
 public class Barcode {
 
 //    private String number;
-    private String date;
+    public String date;
+    public String productName;
 
     public Barcode() {}
 

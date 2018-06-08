@@ -20,6 +20,12 @@ import net.bluehack.bluescanner.fragment.BarcodeReaderFragment;
 import net.bluehack.bluescanner.util.UiUtil;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeoutException;
+
+import io.swagger.client.ApiException;
+import io.swagger.client.api.FoodApi;
+import io.swagger.client.model.GetFoodsResponse;
 
 public class BarcodeActivity extends AppCompatActivity implements BarcodeReaderFragment.BarcodeReaderListener {
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -72,6 +78,31 @@ public class BarcodeActivity extends AppCompatActivity implements BarcodeReaderF
         // barcodeReader.pauseScanning();
         // barcodeReader.resumeScanning();
 
+        //TODO: API TEST
+//        FoodApi apiInstance = new FoodApi();
+//        try {
+//            Integer offset = 0; // Integer |
+//            Integer limit = 56; // Integer |
+//            String foodType = "ALL"; // String |
+//            String searchField = "barcode"; // String |
+//            String searchValue = "8801045931470";
+//            GetFoodsResponse result = null;
+//            try {
+//                apiInstance.addHeader("DS-ApplicationKey","c9598e7b-4aca-49ff-8e26-3ecb37486370");
+////                apiInstance.addHeader("DS-AccessToken","rocketview_test");
+//                result = apiInstance.getFoods(offset, limit, foodType, searchField, searchValue);
+//                Log.e("apiTest:", result.getItems().toString());
+//            } catch (TimeoutException e) {
+//                e.printStackTrace();
+//            } catch (ExecutionException e) {
+//                e.printStackTrace();
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        } catch (ApiException e) {
+//            System.err.println("Exception when calling FoodApi#getFoods");
+//            e.printStackTrace();
+//        }
     }
 
     @Override

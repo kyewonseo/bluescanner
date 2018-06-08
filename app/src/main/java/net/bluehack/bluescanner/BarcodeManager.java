@@ -36,10 +36,11 @@ public class BarcodeManager {
         FirebaseDatabaseHelper.getInstance().getDatabaseBlocks()
                 .child(BARCODE_TEST)
                 .child(barcodeNum)
-                .addValueEventListener(new ValueEventListener() {
+                .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-//                        barcode = dataSnapshot.getValue(Barcode.class);
+//                        Barcode barcode = dataSnapshot.getValue(Barcode.class);
+//                        Log.e("barcodeTest:", String.valueOf(barcode.date));
                         String date = String.valueOf(dataSnapshot.getValue());
                         barcodeListener.onResult(date);
 

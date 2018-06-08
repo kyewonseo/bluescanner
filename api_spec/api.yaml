@@ -1,0 +1,150 @@
+swagger: '2.0'
+info:
+  description: This is a API document for EatSight
+  version: 0.0.1
+  title: eatsight-api
+  contact:
+    email: master@bluehack.net
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+host: 'apis.eatsight.com'
+basePath: /
+
+tags:
+  - name: food
+    description: food
+schemes:
+  - https
+paths:
+  /foodinfo/1.0/foods:
+    get:
+      tags:
+      - food
+      summary: ""
+      description: ""
+      operationId: "getFoods"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "offset"
+        in: "query"
+        description: ""
+        required: true
+        type: integer
+        format: int32
+      - name: "limit"
+        in: "query"
+        description: ""
+        required: true
+        type: integer
+        format: int32
+      - name: "foodType"
+        in: "query"
+        description: ""
+        required: true
+        type: string
+      - name: "searchField"
+        in: "query"
+        description: ""
+        required: true
+        type: string
+      - name: "searchValue"
+        in: "query"
+        description: ""
+        required: true
+        type: string
+      security:
+        - apiKey: []
+          apiToken: []
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/GetFoodsResponse"
+        400:
+          description: "Invalid input"
+        404:
+          description: "Foods not found"
+
+securityDefinitions:
+  apiKey:
+    type: apiKey
+    in: header
+    name: DS-ApplicationKey
+  apiToken:
+    type: apiKey
+    in: header
+    name: DS-AccessToken
+definitions:
+  Page:
+    type: object
+    properties:
+      offset:
+        type: integer
+        format: int32
+      limit:
+        type: integer
+        format: int32
+      resultCount:
+        type: integer
+        format: int32
+      totalCount:
+        type: integer
+        format: int32
+
+  Nutrient:
+    type: object
+    properties:
+      servingAmount:
+        type: string
+      servingAmountUnit:
+        type: string
+      rate:
+        type: string
+      nutrientName:
+        type: string
+      nutrientId:
+        type: string
+
+  Item:
+    type: object
+    properties:
+      foodId:
+        type: string
+      mainNutrientServingMeasureAmount:
+        type: string
+      foodName:
+        type: string
+      vendors:
+        type: string
+      barcode:
+        type: string
+      foodType:
+        type: string
+      volume:
+        type: string
+      mainNutrientServingMeasureUnit:
+        type: string
+      registerDate:
+        type: string
+      thumbnailUrl:
+        type: string
+      volumeUnit:
+        type: string
+      mainNutrients:
+        type: array
+        items:
+          $ref: "#/definitions/Nutrient"
+
+  GetFoodsResponse:
+    type: object
+    properties:
+      page:
+        $ref: '#/definitions/Page'
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/Item'
+
+
